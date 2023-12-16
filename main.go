@@ -175,14 +175,36 @@ func UpdateUserEndpoint(ctx *gofr.Context) (interface{}, error) {
 	// Return the result as JSON
 	return result, nil
 }
+func DeleteUserEndpoint(ctx *gofr.Context) (interface{}, error) {
+	// Set content type to JSON
+	//ctx.Header("Content-Type", "application/json")
+
+	// Get user ID from path parameter
+	id := ctx.PathParam("id")
+
+	// Get database collection
+	collection := client.Database("UMS").Collection("users")
+
+	// Delete user from the collection
+	result, err := collection.DeleteOne(context.TODO(), bson.M{"_id": id})
+	if err != nil {
+		response := "Error deleting user"
+		return response, err
+	}
+
+	// Return the result as JSON
+	return result, nil
+}
 
 func main() {
+	//initialised GofR app
 	app := gofr.New()
 
 	app.POST("/users", CreateUserEndpoint)
 	app.GET("/users", GetUserEndpoint)
 	app.GET("/users/{id}", GetUserEndpoint)
 	app.PUT("/users/{id}", UpdateUserEndpoint)
+	app.DELETE("/users/{id}", DeleteUserEndpoint)
 
 	app.Start()
 
