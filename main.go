@@ -139,12 +139,50 @@ func GetUserEndpoint(ctx *gofr.Context) (interface{}, error) {
 	return users, nil
 }
 
+// UpdateUserEndpoint updates a user.
+func UpdateUserEndpoint(ctx *gofr.Context) (interface{}, error) {
+	// Set content type to JSON
+	//ctx.Header("Content-Type", "application/json")
+
+	// Get user ID from path parameter
+	id := ctx.PathParam("id")
+
+	// Initialize user
+	var user User
+
+	// Bind request body to user variable
+	if err := ctx.Bind(&user); err != nil {
+		response := "Error decoding user data"
+		return response, err
+	}
+
+	// Get database collection
+	collection := client.Database("UMS").Collection("users")
+
+	// Update user in the collection
+	result, err := collection.UpdateOne(
+		context.TODO(),
+		bson.M{"_id": id},
+		bson.D{
+			{"$set", bson.D{{"username", user.Username}, {"email", user.Email}}},
+		},
+	)
+	if err != nil {
+		response := "Error updating user"
+		return response, err
+	}
+
+	// Return the result as JSON
+	return result, nil
+}
+
 func main() {
 	app := gofr.New()
 
 	app.POST("/users", CreateUserEndpoint)
 	app.GET("/users", GetUserEndpoint)
 	app.GET("/users/{id}", GetUserEndpoint)
+	app.PUT("/users/{id}", UpdateUserEndpoint)
 
 	app.Start()
 
