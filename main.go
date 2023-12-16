@@ -36,7 +36,6 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
 	// Check the connection
 	err = client.Ping(context.TODO(), nil)
 	if err != nil {
