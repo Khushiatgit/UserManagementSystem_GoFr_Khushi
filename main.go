@@ -45,8 +45,41 @@ func init() {
 	fmt.Println("Connected to MongoDB!")
 }
 
+// CreateUserEndpoint creates a new user.
+func CreateUserEndpoint(ctx *gofr.Context) (interface{}, error) {
+	// Set content type to JSON
+	//header := ctx.Header("Content-Type", "application/json")
+
+	// Initialize user
+	var user User
+
+	// Bind request body to user variable
+	if err := ctx.Bind(&user); err != nil {
+		response := "Error decoding user data"
+		return response, err
+	}
+
+	// Set user creation time
+	user.CreatedAt = time.Now()
+
+	// Get database collection
+	collection := client.Database("UMS").Collection("users")
+
+	// Insert user into the collection
+	result, err := collection.InsertOne(context.TODO(), user)
+	if err != nil {
+		response := "Error creating user"
+		return response, err
+	}
+
+	// Return the result as JSON
+	return result, nil
+}
+
 func main() {
 	app := gofr.New()
+
+	app.POST("/users", CreateUserEndpoint)
 
 	app.Start()
 
