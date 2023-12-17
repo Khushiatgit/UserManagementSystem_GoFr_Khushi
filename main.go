@@ -27,7 +27,7 @@ var client *mongo.Client
 // Connect to MongoDB
 func init() {
 	// Replace the connection string with your MongoDB cluster connection string
-	connectionString := "mongodb+srv://khushi:khushi123@cluster0.fg03hwb.mongodb.net/?retryWrites=true&w=majority"
+	connectionString := "mongodb+srv://khushi:<password>@cluster0.fg03hwb.mongodb.net/?retryWrites=true&w=majority"
 	clientOptions := options.Client().ApplyURI(connectionString)
 	// Assume 'client' is your MongoDB client
 	//databaseName := "UMS"
