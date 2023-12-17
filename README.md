@@ -101,4 +101,4 @@ Send a PUT request to /users/{id} with updated user information in the body.
 
 Send a DELETE request to /users/{id} to remove a user from the system.
 
-**Please refer Project Workflow and CRUD Operations.md for complete understanding of the flow and internals of the project, it also has the snapshots for testing of endpoints using Postman🎯 !**
+**Please refer Project Workflow and Postman Collection.md for complete understanding of the flow and internals of the project, it also has the snapshots for testing of endpoints using Postman🎯 !**
