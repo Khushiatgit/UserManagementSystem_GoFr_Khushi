@@ -1,12 +1,12 @@
 
-**User Management System (UMS) - GoFR**
+**User Management System (UMS) - GoFR** 🚀🚀
 
 
 <img width="1155" alt="Screenshot 2023-12-17 at 3 17 24 AM" src="https://github.com/Khushiatgit/UserManagementSystem_GoFR_Khushi/assets/83766368/f1e35811-2845-4d8e-bc12-b0db0c9890e5">
 
 
 
-**Overview**
+ **Overview** 👥
 
 The User Management System (UMS) is a simple RESTful API implemented in Gofr, designed for managing user-related operations. This project provides basic functionality to create, retrieve, update, and delete user records in a MongoDB database. The system exposes endpoints to interact with user data, making it a foundational component for applications requiring user management capabilities.
 
