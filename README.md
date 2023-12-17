@@ -38,6 +38,8 @@ cd user-management-system-gofr
 _**Install dependencies:**_
 
 go mod download
+go get gofr.dev
+
 
 _**Configure MongoDB:**_
 
